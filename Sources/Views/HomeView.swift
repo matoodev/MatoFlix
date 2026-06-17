@@ -28,6 +28,7 @@ struct HomeView: View {
     }
 
     private var featured: Movie? {
+        guard !popularMovies.isEmpty else { return nil }
         guard let first = popularMovies.first else { return nil }
         return Movie(
             title: first.title,
