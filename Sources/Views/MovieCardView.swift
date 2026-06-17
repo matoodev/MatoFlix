@@ -34,7 +34,10 @@ struct CardImageView: View {
     }
 
     private func load() async {
-        guard let url, let imgUrl = URL(string: url) else { return }
+        guard let url, let imgUrl = URL(string: url) else {
+            Log.debug("Image load skipped: nil url")
+            return
+        }
         let key = url as NSString
         if let cached = imageCache.object(forKey: key) {
             await MainActor.run { nsImage = cached }
