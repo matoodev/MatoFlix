@@ -138,6 +138,8 @@ struct HomeView: View {
         }
     }
 
+    @State private var showAllMovies = false
+
     private var filteredCategories: [Category] {
         let allCategories = [
             Category(name: "Trending Now"),
