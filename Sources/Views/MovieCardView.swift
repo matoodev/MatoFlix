@@ -33,6 +33,7 @@ struct CardImageView: View {
         .task { await load() }
     }
 
+    @MainActor
     private func load() async {
         guard let url, let imgUrl = URL(string: url) else { return }
         let key = url as NSString
