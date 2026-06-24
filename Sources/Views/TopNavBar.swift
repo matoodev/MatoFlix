@@ -144,7 +144,11 @@ struct TopNavBar: View {
     }
 
     private func performSearch(query: String) async {
-        guard !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        let q = query.trimmingCharacters(in: .whitespaces)
+        guard !q.isEmpty else {
+            await MainActor.run { searchResults = []; isLoading = false }
+            return
+        }
         await MainActor.run { isLoading = true }
         do {
             let results = try await TMDBAPI.shared.search(query: query)
